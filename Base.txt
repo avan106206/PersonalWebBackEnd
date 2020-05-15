@@ -1,0 +1,15 @@
+Mysql bench, Mysql Shell
+
+Spring bootstrap: JPA, H2, Web, Lombok
+
+Reactjs: react bootstrap
+
+Backend Build: Entity, DAO, Controller, Service
+
+Frontend: reactjs
+
+Mysql URL: mysql://localhost:3306/webdb?serverTimezone=UTC
+
+API URL: http://localhost:9194/api/products
+
+React frontend URL: http://localhost::3000
