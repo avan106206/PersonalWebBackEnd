@@ -13,3 +13,11 @@ Mysql URL: mysql://localhost:3306/webdb?serverTimezone=UTC
 API URL: http://localhost:9194/api/products
 
 React frontend URL: http://localhost::3000
+
+Production DB
+MySQL on heroeku
+URL:		mysql://b8392779ec62bc:a0a55b93@us-cdbr-east-06.cleardb.net/heroku_98300d4d516b66b?reconnect=true
+Access Credentials
+Username:	b8392779ec62bc
+Password:	a0a55b93
+port:		3306 (generally for all the server)
