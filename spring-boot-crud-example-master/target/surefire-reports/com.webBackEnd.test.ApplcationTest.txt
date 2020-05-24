@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.webBackEnd.test.ApplcationTest
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 81.581 s - in com.webBackEnd.test.ApplcationTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 44.044 s - in com.webBackEnd.test.ApplcationTest

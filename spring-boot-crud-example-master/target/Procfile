@@ -1,1 +1,0 @@
-web: java -jar target/spring-boot-crud-example-2-0.0.1-SNAPSHOT.jar -Dserver.port=$PORT
