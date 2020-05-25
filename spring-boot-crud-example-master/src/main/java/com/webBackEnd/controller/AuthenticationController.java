@@ -21,6 +21,13 @@ public class AuthenticationController {
 	@Autowired
 	UserServiceInterfaceImplementation userServiceInterfaceImplementation;
 	
+	@GetMapping("/index")
+	public ModelAndView index() {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("index"); // resources/templates/login.html
+		return modelAndView;
+	}
+	
 	@GetMapping("register")
 	public ModelAndView register() {
 		ModelAndView modelAndView = new ModelAndView();
