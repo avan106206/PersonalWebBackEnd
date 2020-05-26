@@ -1,6 +1,7 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html>
+
 <head th:replace="fragment :: head"/>
+
     <body id="page-top">
         <!-- Navigation-->
         <div id="top"/>
@@ -10,11 +11,10 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav text-uppercase ml-auto">
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#top">Home</a></li>
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#shop">Shop</a></li>
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#about">About</a></li>
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#contact">Contact</a></li>
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/authentication/login">Login</a></li>
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="/authentication/register">register</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#shop">Shoping center</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#about">Shopping cart</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#contact">Setting</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="">Logout</a></li>
                     </ul>
                 </div>
             </div>
@@ -23,16 +23,15 @@
         <header class="masthead">
             <div class="container">
                 <img class="img-fluid d-block mx-auto" src="assets/img/portfolio/02-full.jpg" alt="" />
-                <div class="masthead-subheading">Welcome To TomChan Spring project</div>
-                <div class="masthead-heading text-uppercase">Tom's Sport Shop</div>
+                <div class="masthead-subheading">Welcome</div>
                 <div class="row_topbotton">
                     <div class="col-md-12">
-                    <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="/authentication/login">Login</a>
+                    <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="/login">Login</a>
                     </div>
                 </div>
                 <div class="row_topbotton">   
                     <div class="col-md-12">
-                    <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="/authentication/register">Register</a>
+                    <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="/register">Register</a>
                     </div>                    
                 </div>
             </div>
@@ -352,4 +351,5 @@
         <!-- Core theme JS-->
         <script src="js/scripts.js"></script>
     </body>
+
 </html>

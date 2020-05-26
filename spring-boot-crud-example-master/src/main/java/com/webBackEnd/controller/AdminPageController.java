@@ -17,8 +17,8 @@ import com.webBackEnd.service.UserServiceInterfaceImplementation;
 
 @Controller
 //@RestController
-@RequestMapping(value = {"/authentication"})
-public class AuthenticationController {
+@RequestMapping(value = {"/admin"})
+public class AdminPageController {
 	@Autowired
 	UserServiceInterfaceImplementation userServiceInterfaceImplementation;
 	
@@ -29,7 +29,7 @@ public class AuthenticationController {
 		return modelAndView;
 	}
 	
-	@GetMapping("/register")
+	@GetMapping("register")
 	public ModelAndView register() {
 		ModelAndView modelAndView = new ModelAndView();
 		User user = new User();
@@ -38,7 +38,7 @@ public class AuthenticationController {
 		return modelAndView; //return both view and model
 	}
 	
-	@PostMapping("/register") // when the form with action: post submitted, route to here
+	@PostMapping("register") // when the form with action: post submitted, route to here
 	public ModelAndView registerUser(@Valid User user, BindingResult bindingResult, ModelMap modelMap) {
 		ModelAndView modelAndView = new ModelAndView(); //modelAndView is the function variable
 		//Check the validation Error

@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="index :: head"/>
+<head th:replace="fragment :: head"/>
 
 <body class="Accountcontact">
 	<div class="container">
 			<!-- <img th:src="@{/images/login.jpg}" class="img-responsive center-block" width="300" height="300" alt="Logo" /> -->
-			<form th:action="@{/login}" method="POST" class="form-signin">
+			<form th:action="@{/authentication/login}" method="POST" class="form-signin">
 				<div class="text-center">
-                    <h2 class="section-heading" style="color:white">Registration Form</h2>
+                    <h2 class="section-heading" style="color:white">Login</h2>
                 </div>
 				<br /> <input type="text" id="email" name="email" th:placeholder="Email" class="form-control" /> <br /> <input type="password" th:placeholder="Password" id="password" name="password" class="form-control" /> <br />
 
@@ -18,8 +18,12 @@
                 <div class="text-center">
                     <div id="success"></div>
                     <button class="btn btn-primary btn-xl" name="Submit" value="Login" type="Submit" th:text="Login" style="margin-right:10px;"></button>
-                </div>
-				<a href="/recover-password">Forgot password?</a>
+				</div>
+				<div class="text-center">
+					<br />
+					<a href="/recover-password">Forgot password?</a>
+					<a href="/">Back</a>
+				</div>
 			</form>
 	</div>
 </body>

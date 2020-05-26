@@ -24,7 +24,7 @@ public class CustomerLoginSuccessHandler extends SimpleUrlAuthenticationSuccessH
 
 		String targetUrl = determineTargetUrl(authentication);
 
-		if (response.isCommitted()) {
+		if (response.isCommitted()) {//if the response is commit, the header should have the status
 			return;
 		}
 		RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
@@ -32,7 +32,7 @@ public class CustomerLoginSuccessHandler extends SimpleUrlAuthenticationSuccessH
 	}
 	
 	protected String determineTargetUrl(Authentication authentication) {
-		String url = "/login?error=true";
+		String url = "/authentication/login?error=true";
 
 		// Fetch the roles from Authentication object
 		Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
@@ -43,10 +43,10 @@ public class CustomerLoginSuccessHandler extends SimpleUrlAuthenticationSuccessH
 
 		// check user role and decide the redirect URL
 		if (roles.contains("ADMIN_USER")) {
-			url = "/admin";
+			url = "/authentication/admin";
 		} 
 		else if (roles.contains("SITE_USER")) {
-			url = "/home";
+			url = "/user";
 		}
 		return url;
 	}

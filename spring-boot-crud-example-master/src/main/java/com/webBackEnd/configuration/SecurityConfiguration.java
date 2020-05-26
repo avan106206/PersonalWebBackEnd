@@ -44,24 +44,20 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 		http.authorizeRequests()
 				// URLs matching for access rights
-				.antMatchers("/", "/assets/img/**").permitAll()
+				.antMatchers("/", "/assets/img/**", "/authentication/login", "/authentication/register","/fragment" ).permitAll()
 				.antMatchers("/index").permitAll()
-				.antMatchers("/login").permitAll()
-				.antMatchers("/register").permitAll()
-				.antMatchers("/home/**").hasAnyAuthority("SUPER_USER", "ADMIN_USER", "SITE_USER")
-				.antMatchers("/admin/**").hasAnyAuthority("SUPER_USER","ADMIN_USER")
+				.antMatchers("/user/**").hasAnyAuthority("SUPER_USER", "ADMIN_USER", "SITE_USER")
+				.antMatchers("/authentication/admin/**").hasAnyAuthority("SUPER_USER","ADMIN_USER")
 				.anyRequest().authenticated()
-				.and()
-				// form login
-				.csrf().disable().formLogin()
-				.loginPage("/login")
-				.failureUrl("/login?error=true")
-				.successHandler(sucessHandler)
+				.and()//end of antMatchers
+				.csrf().disable().formLogin() //for login
+				.loginPage("/authentication/login")//when the post request coming from /login, trigger this part
+				.failureUrl("/authentication/login?error=true")
+				.successHandler(sucessHandler)//Autowire to CustomerLoginSucessHandler
 				.usernameParameter("email")
 				.passwordParameter("password")
 				.and()
-				// logout
-				.logout()
+				.logout() //for logout
 				.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
 				.logoutSuccessUrl("/").and()
 				.exceptionHandling()
