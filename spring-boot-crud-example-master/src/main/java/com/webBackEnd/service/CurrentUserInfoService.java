@@ -19,8 +19,9 @@ public class CurrentUserInfoService {
 		return userRepository.findByemail(email);
 	}
 	
-	public List<UserCartProjection> getCurrentCart(){
-		return userRepository.findcart();
+	public List<UserCartProjection> getCurrentCart(int auth_user_id){
+		System.out.print(auth_user_id+"service");
+		return userRepository.findcart(auth_user_id);
 	}
 
 }

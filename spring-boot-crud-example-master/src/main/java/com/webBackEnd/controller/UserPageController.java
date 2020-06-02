@@ -195,6 +195,7 @@ public class UserPageController {
 		/**Get current user id and set user id to cart entity**/
 		Authentication authentication = securityContextHandlerInterface.getAuthentication();
 		User user = currentUserInfoService.findByemail(authentication.getName());
+		int userid = user.getId();
 		//cart.setAuth_user_id(user.getId());
 		/**Set the product id and need number**/
 		cart.setAuth_user_id(user.getId());
@@ -202,12 +203,12 @@ public class UserPageController {
 		cart.setNeednum(neednum);
 		/**insert the cart entity**/
 		cartService.saveCart(cart);
-		int userid = user.getId();
 		System.out.println(userid);
 		String first_username = user.getName();
 		String last_username = user.getLastName();
 		String email = user.getEmail();
-		List<UserCartProjection> cart_items = currentUserInfoService.getCurrentCart();
+		System.out.println("add cart to"+userid);
+		List<UserCartProjection> cart_items = currentUserInfoService.getCurrentCart(userid);
 		ModelAndView modelAndView = new ModelAndView();
 		String authen = "user";
 		boolean isempty = (cart_items.size() == 0)?true:false;
@@ -228,8 +229,11 @@ public class UserPageController {
     @GetMapping("/deleteCartItem/{id}")
     public String deleteStudent(@PathVariable("id") int id, Model model) {
     	System.out.println(id);
+		Authentication authentication = securityContextHandlerInterface.getAuthentication();
+		User user = currentUserInfoService.findByemail(authentication.getName());//authentication.getname is actually the login email
+		int userid = user.getId();
     	cartService.deleteCart(id);
-    	List<UserCartProjection> cart_items = currentUserInfoService.getCurrentCart();
+    	List<UserCartProjection> cart_items = currentUserInfoService.getCurrentCart(userid);
     	model.addAttribute("cart_items", cart_items);
         return "cart";
     }
@@ -243,7 +247,7 @@ public class UserPageController {
 		String first_username = user.getName();
 		String last_username = user.getLastName();
 		String email = user.getEmail();
-		List<UserCartProjection> cart_items = currentUserInfoService.getCurrentCart();
+		List<UserCartProjection> cart_items = currentUserInfoService.getCurrentCart(userid);
 		ModelAndView modelAndView = new ModelAndView();
 		String authen = "user";
 		boolean isempty = (cart_items.size() == 0)?true:false;
