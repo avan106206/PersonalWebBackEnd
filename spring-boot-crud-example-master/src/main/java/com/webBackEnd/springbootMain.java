@@ -1,4 +1,4 @@
-package com.webBackEnd;
+package com.webBackEnd;	
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -8,7 +8,7 @@ public class springbootMain {
 
 	public static void main(String[] args) {
 		SpringApplication.run(springbootMain.class, args);
-		
+ 		
 	}
 
 }

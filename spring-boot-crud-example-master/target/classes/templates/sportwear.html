@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragment :: head"/>
+    <body id="page-top">
+        <!-- Navigation-->
+        <div id="top"/>
+        <div th:switch="${authen}"> 
+			<div th:case="'user'">
+                <nav th:replace="fragment :: usernav" /></div>
+			<div th:case="'anonymous'">
+                <nav th:replace="fragment :: publicnav" />
+            </div>
+		</div>
+        <!--head-->
+        <header class="salemasthead">
+            <div class="container">
+            </div>
+        </header>
+        <!-- Services-->
+        <div class="container">
+            <div class="row">
+					<div class="col-md-4" th:each="product: ${products_List}">
+						<div class="product ftco-animate">
+							<img class="img-fluid d-block mx-auto" th:src="@{${'assets/img/product/' + product.id + '.jpg'}}" alt="" />
+							<div class="text text-center">
+								<p class="text-muted"  th:text="'name:' + ${product.name}"/>
+								<p class="text-muted" th:text="'brand:' + ${product.brand}"/>
+                                <p class="text-muted" th:text="'price:' + ${product.price}"/>
+                                <div class="text-center" th:switch="${authen}">
+                                    <div th:case="'user'">	
+                                        <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" th:href="@{/user/individualproduct(productid=${product.id})}">View detail</a>
+                                    </div>
+                                    <div th:case="'anonymous'">
+                                        <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" th:href="@{/public/individualproduct(productid=${product.id})}">View detail</a>
+                                    </div>
+                                </div>
+							</div>
+						</div>
+					</div>
+        </div>
+        </div>
+        <p></p>
+        <!-- Footer-->
+        <footer th:replace="fragment :: footer" />
+        <!-- Bootstrap core JS-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
+        <!-- Third party plugin JS-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+        <!-- Contact form JS-->
+        <script src="assets/mail/jqBootstrapValidation.js"></script>
+        <script src="assets/mail/contact_me.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+    </body>
+</html>
+

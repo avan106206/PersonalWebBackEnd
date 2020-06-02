@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragment :: head"/>
+    <body id="page-top">
+        <!-- Navigation-->
+        <div id="top"/>
+        <div th:switch="${authen}"> 
+			<div th:case="'user'">
+                <nav th:replace="fragment :: usernav" /></div>
+			<div th:case="'anonymous'">
+                <nav th:replace="fragment :: publicnav" />
+            </div>
+		</div>
+        <!--head-->
+        <header class="salemasthead">
+            <div class="container">
+            </div>
+        </header>
+        <!-- Services-->
+        <div class="container">
+            <div class="row">
+					<div class="col-md-4">
+						<div class="product ftco-animate">
+							<img class="img-fluid d-block mx-auto" src="assets/img/product/1000.jpg" alt="" />
+							<div class="text text-center">
+								<p class="text-muted">Name: VT-ZForce</p>
+								<p class="text-muted">Brand: Yonex</p>
+                                <p class="text-muted">Price: HKD $1200.00</p>
+                                <div class="text-center" th:switch="${authen}">
+                                    <div th:case="'user'">
+                                        <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" th:href="@{/user/individualproduct(productid='1000')}">View detail</a>
+                                    </div>
+                                    <div th:case="'anonymous'">
+                                        <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" th:href="@{/public/individualproduct(productid='1000')}">View detail</a>
+                                    </div>
+                                </div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="product ftco-animate">
+							<img class="img-fluid d-block mx-auto" src="assets/img/product/1001.jpg" alt="" />
+							<div class="text text-center">
+								<p class="text-muted">Name: Brave Sword 11 R</p>
+								<p class="text-muted">Brand: Victor</p>
+                                <p class="text-muted">Price: HKD $1200.00</p>
+                                <div class="text-center" th:switch="${authen}">
+                                    <div th:case="'user'">
+                                        <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" th:href="@{/user/individualproduct(productid='1001')}">View detail</a>
+                                    </div>
+                                    <div th:case="'anonymous'">
+                                        <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" th:href="@{/public/individualproduct(productid='1001')}">View detail</a>
+                                    </div>
+                                </div>                                
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="product ftco-animate">                          
+							<img class="img-fluid d-block mx-auto" src="assets/img/product/1002.jpg" alt="" />
+							<div class="text text-center">
+								<p class="text-muted">Name: Nanoray 900 New Color SP Ver</p>
+								<p class="text-muted">Brand: Yonex</p>
+                                <p class="text-muted">Price: HKD $800.00</p>
+                                <div class="text-center" th:switch="${authen}">
+                                    <div th:case="'user'">
+                                        <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" th:href="@{/user/individualproduct(productid='1002')}">View detail</a>
+                                    </div>
+                                    <div th:case="'anonymous'">
+                                        <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" th:href="@{/public/individualproduct(productid='1002')}">View detail</a>
+                                    </div>
+                                </div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="product ftco-animate">
+							<img class="img-fluid d-block mx-auto" src="assets/img/product/1003.jpg" alt="" />
+							<div class="text text-center">
+								<p class="text-muted">Name: AuraSpeed 90K</p>
+								<p class="text-muted">Brand: Victor</p>
+                                <p class="text-muted">Price: HKD $1500.00</p>
+                                <div class="text-center" th:switch="${authen}">
+                                    <div th:case="'user'">
+                                        <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" th:href="@{/user/individualproduct(productid='1003')}">View detail</a>
+                                    </div>
+                                    <div th:case="'anonymous'">
+                                        <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" th:href="@{/public/individualproduct(productid='1003')}">View detail</a>
+                                    </div>
+                                </div>	
+                            </div>
+						</div>
+					</div>
+				</div>
+        </div>
+        <p></p>
+        <!-- Footer-->
+        <footer th:replace="fragment :: footer" />
+        <!-- Bootstrap core JS-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
+        <!-- Third party plugin JS-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+        <!-- Contact form JS-->
+        <script src="assets/mail/jqBootstrapValidation.js"></script>
+        <script src="assets/mail/contact_me.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+    </body>
+</html>

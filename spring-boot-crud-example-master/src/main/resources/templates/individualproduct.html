@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragment :: head"/>
+    <body id="page-top">
+        <!-- Navigation-->
+        <div id="top"/>
+        <div th:switch="${authen}"> 
+			<div th:case="'user'">
+                <nav th:replace="fragment :: usernav" /></div>
+			<div th:case="'anonymous'">
+                <nav th:replace="fragment :: publicnav" />
+            </div>
+		</div>
+        <!-- Masthead-->
+        <header class="salemasthead">
+            <div class="container">
+            </div>
+        </header>
+        <!-- Services-->
+		<div class="container">
+    		<div class="row">
+    			<div class="col-lg-6 mb-5 ftco-animate">
+                    <img th:src="@{${'assets/img/product/' + productid + '.jpg'}}" class="img-fluid" alt="Colorlib Template">
+    			</div>
+    			<div class="col-lg-6 product-details pl-md-5 ftco-animate">
+                    <br/>
+                    <br/>
+    				<h3 th:text="${productname}"/>
+                    <div class="masthead-subheading" th:text=" 'price:' + ${productprice}"/>
+                    <div class="masthead-subheading" th:text=" 'brand:' + ${productbrand}"/>
+                    <div class="masthead-subheading" th:text=" 'Manufacturing Location: ' + ${productMadein}"/> 
+                    <div class="masthead-subheading" th:text=" ${productdescription}"/>
+                </div>      
+    		<div class="col-lg-6 product-details pl-md-5 ftco-animate">  
+				<div class="row mt-4">
+					<div class="input-group col-md-6 d-flex mb-3">
+                        <span class="input-group-btn">
+                            <button type="button" class="quantity-left-minus btn btn-danger btn-number"  data-type="minus" data-field="">
+                              <i class="fa fa-minus"></i>
+                            </button>
+                        </span>
+                            <input type="text" id="NeedNum"  name="NeedNum" class="form-control input-number" value="1" min="1" max="100">
+                            <input type="hidden" id="ProIdPass" th:value="${productid}"/>
+                        <span class="input-group-btn">
+                            <button type="button" class="quantity-right-plus btn btn-success btn-number" data-type="plus" data-field="">
+                                 <i class="fa fa-plus"></i>
+                            </button>
+                        </span>
+	          	    </div>
+	          	<div class="w-100"></div>
+          	    </div>
+                <div th:switch="${authen}">
+                    <br/> 
+			        <div th:case="'user'">
+                        <p><a href="#" id="acartidtag" target="_blank" class="btn btn-primary py-3 px-5 mr-2">Add to Cart</a>
+                        <a href="/user/shoppingcenter" class="btn btn-primary py-3 px-5">Back</a></p>
+                     </div>
+			        <div th:case="'anonymous'">
+                        <p><a href="/authentication/login" class="btn btn-primary py-3 px-5 mr-2">Add to Cart</a>
+                        <a href="/public/shoppingcenter" class="btn btn-primary py-3 px-5">Back</a></p>
+                    </div>
+                </div>
+            </div>    
+    		</div>
+    	</div>
+        <!-- Footer-->
+		<footer th:replace="fragment :: footer" />
+        <!-- Bootstrap core JS-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
+        <!-- Third party plugin JS-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+        <!-- Contact form JS-->
+        <script src="assets/mail/jqBootstrapValidation.js"></script>
+        <script src="assets/mail/contact_me.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+        <script>
+            $(document).ready(function(){
+
+            var NeedNum=1;
+            $('.quantity-right-plus').click(function(e){
+                
+                // Stop acting like a button
+                e.preventDefault();
+                // Get the field name
+                var NeedNum = parseInt($('#NeedNum').val());
+                
+                // If is not undefined
+                    var NeedNumMain = NeedNum + 1
+                    $('#NeedNum').val(NeedNumMain);
+                    var ProIdPass = $("#ProIdPass").val();
+                    document.getElementById("acartidtag").href= "/user/addcart?productid=" +ProIdPass + "&NeedNum=" + NeedNumMain;                
+                    // Increment
+                
+            });
+
+            $('.quantity-left-minus').click(function(e){
+                // Stop acting like a button
+                e.preventDefault();
+                // Get the field name
+                var NeedNum = parseInt($('#NeedNum').val());
+                
+                // If is not undefined
+            
+                    // Increment
+                    if(NeedNum>0){
+                    var NeedNumMain = NeedNum - 1;
+                    $('#NeedNum').val(NeedNumMain);
+                    var ProIdPass = $("#ProIdPass").val();
+                    document.getElementById("acartidtag").href= "/user/addcart?productid=" +ProIdPass + "&NeedNum=" + NeedNumMain; 
+                    }
+            });    
+            var NeedNumMain = 1;
+            var NeedNum = parseInt($('#NeedNum').val());
+            var ProIdPass = $("#ProIdPass").val();
+            document.getElementById("acartidtag").href= "/user/addcart?productid=" +ProIdPass + "&NeedNum=" + NeedNumMain;  
+            
+            });
+        </script>
+    </body>
+</html>

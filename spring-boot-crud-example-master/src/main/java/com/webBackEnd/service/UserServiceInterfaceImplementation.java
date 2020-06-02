@@ -2,6 +2,7 @@ package com.webBackEnd.service;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -33,7 +34,10 @@ public class UserServiceInterfaceImplementation implements UserServiceInterface{
 
 	@Override
 	public boolean isUserAlreadyPresent(User user) {
-		// TODO Auto-generated method stub
+		List<User> userlist = userRepository.findAll();
+		for(User userset: userlist) {
+			if(userset.getEmail().contains(user.getEmail()) )	return true;
+		}
 		return false;
 	}// here I implement the interface of AuthenticationService
 

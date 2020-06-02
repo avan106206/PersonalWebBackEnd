@@ -1,5 +1,6 @@
 package com.webBackEnd.entity;
 
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -11,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
@@ -20,6 +22,8 @@ import org.hibernate.validator.constraints.Length;
 @Entity
 @Table(name = "auth_user")
 public class User {
+
+	private static final CascadeType[] ALL = null;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -50,9 +54,14 @@ public class User {
 	@Column(name = "status")
 	private String status;
 
+//    @OneToMany(orphanRemoval=true)
+//    @JoinColumn(name="auth_user_id", referencedColumnName="auth_user_id") // join column is in table for Order
+//    private Set<Cart> cart;
+
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "auth_user_role", joinColumns = @JoinColumn(name = "auth_user_id"), inverseJoinColumns = @JoinColumn(name = "auth_role_id"))
 	private Set<Role> roles;
+	
 
 	public int getId() {
 		return id;

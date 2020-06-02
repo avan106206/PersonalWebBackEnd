@@ -4,13 +4,16 @@ import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.session.HttpSessionEventPublisher;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
@@ -37,16 +40,20 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.jdbcAuthentication().usersByUsernameQuery(usersQuery).authoritiesByUsernameQuery(rolesQuery)
 				.dataSource(dataSource).passwordEncoder(bCryptPasswordEncoder);
-	}//use the usersQuery and rolesQuery we set in the properties to achieve the authentication andauthorization 
+	}//use the usersQuery and rolesQuery we set in the properties to achieve the authentication and authorization 
 
+	@Bean
+	public HttpSessionEventPublisher httpSessionEventPublish() { //listener to monitor if the session is destoried, because the maximum session is limited to 2
+		return new HttpSessionEventPublisher();
+	}
+	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 
 		http.authorizeRequests()
 				// URLs matching for access rights
-				.antMatchers("/", "/assets/img/**", "/authentication/login", "/authentication/register","/fragment" ).permitAll()
-				.antMatchers("/index").permitAll()
-				.antMatchers("/user/**").hasAnyAuthority("SUPER_USER", "ADMIN_USER", "SITE_USER")
+				.antMatchers("/", "/assets/img/**", "/authentication/login", "/authentication/register","/fragment", "/index", "/public/**").permitAll()
+				.antMatchers("/user/**", "/logout", "/user/shoppingcenter/**").hasAnyAuthority("SUPER_USER", "ADMIN_USER", "SITE_USER")
 				.antMatchers("/authentication/admin/**").hasAnyAuthority("SUPER_USER","ADMIN_USER")
 				.anyRequest().authenticated()
 				.and()//end of antMatchers
@@ -58,10 +65,21 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.passwordParameter("password")
 				.and()
 				.logout() //for logout
+				.invalidateHttpSession(true)
+				.deleteCookies("JSESSIONID")
 				.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-				.logoutSuccessUrl("/").and()
+				.logoutSuccessUrl("/")
+				.and()
 				.exceptionHandling()
-				.accessDeniedPage("/access-denied");
+				.accessDeniedPage("/access-denied")
+				.and()
+				.sessionManagement()
+				.sessionFixation().migrateSession()
+				.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
+				.invalidSessionUrl("/")
+				.maximumSessions(2)
+				.expiredUrl("/")//The session timeout is set in application-properties		
+				;
 	}
 
 	@Override

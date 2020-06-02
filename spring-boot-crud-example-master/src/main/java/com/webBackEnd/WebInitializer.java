@@ -1,6 +1,7 @@
 package com.webBackEnd;
 
 import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration;
 
 import org.springframework.web.WebApplicationInitializer;
@@ -10,7 +11,7 @@ import org.springframework.web.servlet.DispatcherServlet;
 
 public class WebInitializer implements WebApplicationInitializer { //to reset the dispatch servlet, run this class to rebuild the whole project.
     @Override
-    public void onStartup(ServletContext container) {
+    public void onStartup(ServletContext container) throws ServletException {
         AnnotationConfigWebApplicationContext context
           = new AnnotationConfigWebApplicationContext();
         context.setConfigLocation("com.webBackEnd.configuration");

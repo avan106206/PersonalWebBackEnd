@@ -60,12 +60,6 @@ public class AuthenticationController {
 		
 	}
 	
-	@GetMapping("/home")
-	public ModelAndView login() {
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("home"); // resources/templates/login.html
-		return modelAndView;
-	}
 	
 	@GetMapping("/login")
 	public ModelAndView home() {
